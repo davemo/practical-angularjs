@@ -2,6 +2,17 @@
 
 In this repository we'll work through creating a sample standalone single page app using core angular directives and services.
 
+## Topics Covered
+
+- `angular.module`
+- `angular.controller`
+- `angular.directive`
+- `angular.$routeProvider`
+- `angular.factory`
+- `ng-app`, `ng-model`, `ng-submit`, `ng-click`
+- `$scope`, inheritance and relationship to the DOM
+- application lifecyel (run, config)
+
 ## Dependencies
 
 - You need a **Browser** you are comfortable with, I use Chrome and Chrome Dev Tools for exploring pieces of the framework.

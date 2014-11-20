@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="vendor/css/kendo.common.min.css" rel="stylesheet" type="text/css" />
+    <link href="vendor/css/kendo.rtl.min.css" rel="stylesheet" type="text/css" />
+    <link href="vendor/css/kendo.default.min.css" rel="stylesheet" type="text/css" />
+    <link href="vendor/css/kendo.dataviz.min.css" rel="stylesheet" type="text/css" />
+    <link href="vendor/css/kendo.dataviz.default.min.css" rel="stylesheet" type="text/css" />
+    <link href="vendor/css/kendo.mobile.all.min.css" rel="stylesheet" type="text/css" />
+    <script src="vendor/js/jquery-1.9.1.min.js"></script>
+    <script src="vendor/js/angular.js"></script>
+    <script src="vendor/js/kendo.all.min.js"></script>
+    <script src="app/js/app.js"></script>
+    <meta charset="utf-8">
+    <title>JS Bin</title>
+</head>
+
+<body ng-app="app">
+
+    <grid-screen>
+        <grid-toolbar>
+            <grid-toolbar-button action="create" name="Add Notification" />
+            <grid-toolbar-button action="refresh" name="Refresh" />
+        </grid-toolbar>
+        <grid-columns>
+            <grid-column title="Name" field="name" />
+            <grid-column title="Subject" field="subject" />
+            <grid-column title="Body" field="body" />
+        </grid-columns>
+        <grid url="stubs/stuff.json" inline-editor />
+    </grid-screen>
+
+</body>
+
+</html>

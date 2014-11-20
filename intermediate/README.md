@@ -2,6 +2,17 @@
 
 In this folder we'll work through expanding the app we built in the fundamentals section by adding a real backend in the Laravel PHP MVC framework, topics covered will include Authentication, CSRF tokens, and how to hook into some of angulars "middleware" inside of things like `$httpProvider.interceptors`
 
+## Topics Covered
+
+- `$http`
+- `$rootScope`
+- `angular.service`
+- `$httpProvider`
+- `$httpProvder.interceptors`
+- `angular.constant`
+- `angular.value`
+- `CSRF` support with `X-XSRF-TOKEN` headers
+
 ## Dependencies
 
 If you want to follow along verbatim you'll need a more involved setup; I recommend following the [instructions on setting up Laravel Homestead](http://laravel.com/docs/4.2/homestead) which makes the environment stuff easy and supports Mac, Linux and Windows.
