@@ -1,0 +1,36 @@
+e2e
+
+laravel routes
+migrations
+user management
+auth controller
+
+app.js from fundamentals
+authenticate against the real back-end
+AuthenticationService implement $http, isLoggedIn
+Limit the scope of access with a run block and $routeChangeStart
+SessionService
+FlashService
+logsUserOutOn401
+$routeProvider.resolve for prefetching data before a route template is rendered
+
+security
+
+books route with resolve
+laravel auth check with before auth filter
+CSRF token injected
+csrf_json filter on laravel
+
+angular service aware of the CSRF token
+ng-init within the singlepage.php, injecting server-side values into angular
+modify LoginController to pass along csrf_token
+
+alternative to injecting with ng-init, angular.constant
+move to AuthenticationService and extend the credentials with CSRF_TOKEN
+
+sanitize, for making sure your user input that you redisplay doesn't have executable code
+use it in the AuthenticationService, sanitizeCredentials
+debugger + $sanitize('<script>alert("hax");</script>');
+
+
+

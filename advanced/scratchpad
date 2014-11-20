@@ -1,0 +1,13 @@
+overview of kendo grid as a 3rd party library
+
+HTML as a DSL
+Complexity
+controllerAs
+order that the link functions fire in
+pre/post link, post link by default
+post -> children linked first, then parents
+$broadcast, $emit for pub/sub
+require pulling in controllers of other directives for sharing information
+mapping html attribute value to 3rd party API calls
+transclusion, multiple transclusion errors
+directives as behaviour triggers
