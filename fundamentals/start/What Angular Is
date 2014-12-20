@@ -1,0 +1,35 @@
+What Angular Is
+
+- HTML Compiler
+
+<div id="grid"></div>
+
+$("#grid").dataTable({
+  url: "/stuff.json",
+  columns: []
+});
+
+- Custom Elements, Precursor Web Components
+
+<grid url="/stuff.json"></grid>
+
+- Directive
+
+<div ng-app
+
+1. element directives <grid>
+2. attribute directives <div ng-app=""
+3. class directives <div class="does-something-dynamic">
+4. comments <!-- do-some-crazy-thing-in-a-comment -->
+
+- Lifecycle Phases
+
+1. Scan DOM for directives
+2. Execute Linking function on each directive
+3. Config Phase
+4. Run Phase
+
+
+
+
+

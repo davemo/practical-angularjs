@@ -33,26 +33,6 @@ App::after(function($request, $response)
 |
 */
 
-Route::filter('auth', function()
-{
-	if (!Auth::check()) {
-		return Response::json(array('flash' => 'Please log in.'), 401);
-	}
-
-	// if (Auth::guest())
-	// {
-	// 	if (Request::ajax())
-	// 	{
-	// 		return Response::make('Unauthorized', 401);
-	// 	}
-	// 	else
-	// 	{
-	// 		return Redirect::guest('login');
-	// 	}
-	// }
-});
-
-
 Route::filter('auth.basic', function()
 {
 	return Auth::basic();
@@ -84,12 +64,6 @@ Route::filter('guest', function()
 | session does not match the one given in this request, we'll bail.
 |
 */
-
-Route::filter('csrf_json', function() {
-  if (Session::token() != Input::json('csrf_token')) {
-    throw new Illuminate\Session\TokenMismatchException;
-  }
-});
 
 Route::filter('csrf', function()
 {

@@ -1,13 +1,13 @@
 <div id="login" class="row">
   <div class="large-6 large-offset-3">
-    <form>
+    <form ng-submit="login()">
       <fieldset class="radius">
         <div class="row">
           <div class="large-6 columns">
-            <input type="text" name="username" placeholder="username"/>
+            <input ng-model="credentials.username" type="text" name="username" placeholder="username"/>
           </div>
             <div class="large-6 columns">
-            <input type="password" name="password" placeholder="password"/>
+            <input ng-model="credentials.password" type="password" name="password" placeholder="password"/>
           </div>
         </div>
 

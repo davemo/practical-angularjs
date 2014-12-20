@@ -1,36 +1,33 @@
 <!doctype html>
 <html lang="en" ng-app="app">
 <head>
-  <base href="/">
   <meta charset="UTF-8">
-  <title>AngularJS AuthenticationService Example</title>
-  <link rel="stylesheet" href="/css/normalize.css">
-  <link rel="stylesheet" href="/css/foundation.min.css">
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="/js/angular.js"></script>
-  <script src="/js/angular-sanitize.js"></script>
-  <script src="/js/angular-route.js"></script>
-  <script src="/js/underscore.js"></script>
-  <script src="/js/app.js"></script>
-  <script>
-    angular.module("app").constant("CSRF_TOKEN", '<?php echo csrf_token(); ?>');
-  </script>
+  <title>An Introduction to Angular.JS</title>
+  <link rel="stylesheet" href="vendor/css/normalize.css">
+  <link rel="stylesheet" href="vendor/css/foundation.min.css">
+  <link rel="stylesheet" href="app/css/style.css">
+  <script src="vendor/js/angular.js"></script>
+  <script src="vendor/js/angular-route.js"></script>
+  <script src="app/js/app.js"></script>
 </head>
 <body>
-
   <div class="row">
     <div class="large-12">
-      <h1>End to End with Angular JS</h1>
-      <div class="row">
-        <div class="large-6 large-offset-3">
-          <div id="flash" class="alert-box alert" ng-show="flash">
-            {{ flash }}
-          </div>
-        </div>
-      </div>
+      <h1>Introduction to Angular.JS</h1>
       <div id="view" ng-view></div>
     </div>
   </div>
+  <!-- We are going to build a very simple web application that allows users to login, logout, and view a couple of nice pictures that demonstrate a few of AngularJS features. -->
 
+  <!-- Things we want to cover today: -->
+
+  <!-- 1. AngularJS module system, creating tiny pieces of functionality -->
+  <!-- 2. Routing ($routeProvider), how do we get pages to transition -->
+  <!-- 3. Dynamic Behaviour ($scope), how we avoid writing a lot of DOM manipulation code -->
+  <!-- 4. Extending the semantics of HTML with angular directives -->
+
+  <!-- Things we can get to if we have time -->
+
+  <!-- a. how angular does dependency injection -->
 </body>
 </html>
