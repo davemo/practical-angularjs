@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+  <head>
+    <base href="/">
+    <title>Practical AngularJS</title>
+    <link rel="stylesheet" type="text/css" href="<%= css %>" media="all" />
+    <script type="text/javascript" src="<%= js %>"></script>
+  </head>
+  <body>
+
+    <div class="row">
+      <div class="large-12">
+        <h1>Practical Angular JS</h1>
+        <div class="row" ng-hide="isLoggedOut()">
+          <div class="large-2 large-offset-5">
+            <button ng-click="expireMySession()">Expire Session</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="large-6 large-offset-3">
+            <div id="flash" class="alert-box alert" ng-show="flash">
+              {{ flash }}
+            </div>
+            <div id="error" class="alert-box alert" ng-show="error">
+              {{ error.message}}
+            </div>
+          </div>
+        </div>
+        <div id="view" ng-view></div>
+      </div>
+    </div>
+  </body>
+</html>
