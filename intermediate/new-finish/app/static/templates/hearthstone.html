@@ -9,6 +9,8 @@
           <th>Set</th>
           <th>Hero</th>
           <th>Description</th>
+          <th>Image</th>
+          <th>Category</th>
         </tr>
       </thead>
       <tbody>
@@ -17,6 +19,10 @@
           <td>{{card.set}}</td>
           <td>{{card.hero}}</td>
           <td>{{card.description}}</td>
+          <td>
+            <img ng-src="{{card.image_url}}" alt="{{card.name}}">
+          </td>
+          <td>{{card.category}}</td>
         </tr>
       </tbody>
     </table>
