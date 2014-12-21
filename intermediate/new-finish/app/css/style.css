@@ -74,5 +74,31 @@ body {
   color: #fff;
 }
 
+#search-input {
+  padding: 5px 0px 5px 5px;
+}
+
+#search-field {
+  color: #f06841 !important;
+  line-height: 1.6;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 0;
+  font-size: 13px;
+  font-family: "Open Sans", Tahoma, Verdana, Arial, Helvetica, sans-serif;
+  padding: 3px 22px 3px 5px;
+  height: 27px;
+}
+
+.search-bar {
+  background-color: #4c1107;
+  border: 1px solid #89371e;
+  border-radius: 5px;
+  box-shadow: inset 0 0 5px #3f0e06;
+  max-width: 15rem;
+  position: relative;
+}
+
 
 
