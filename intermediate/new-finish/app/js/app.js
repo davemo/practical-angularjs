@@ -42,17 +42,17 @@ app.config(function($routeProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
 
   $routeProvider.when('/login', {
-    templateUrl: 'templates/login.html',
+    templateUrl: 'login.html',
     controller: 'LoginController'
   });
 
   $routeProvider.when('/home', {
-    templateUrl: 'templates/home.html',
+    templateUrl: 'home.html',
     controller: 'HomeController'
   });
 
   $routeProvider.when('/list-of-books', {
-    templateUrl: 'templates/books.html',
+    templateUrl: 'books.html',
     controller: 'BooksController',
     resolve: {
       books : function(BookService) {
@@ -62,12 +62,12 @@ app.config(function($routeProvider, $locationProvider) {
   });
 
   $routeProvider.when('/$resource/list-of-books', {
-    templateUrl: 'templates/books_resource.html',
+    templateUrl: 'books_resource.html',
     controller: 'BooksResourceController'
   });
 
   $routeProvider.when('/$http/list-of-books', {
-    templateUrl: 'templates/books_http.html',
+    templateUrl: 'books_http.html',
     controller: 'BooksHttpController',
     resolve: {
       books: function(BookService) {
@@ -77,7 +77,7 @@ app.config(function($routeProvider, $locationProvider) {
   });
 
   $routeProvider.when('/hearthstone', {
-    templateUrl: 'templates/hearthstone.html',
+    templateUrl: 'hearthstone.html',
     controller: function($scope, cards) {
       $scope.cards = cards.data.cards;
     },
