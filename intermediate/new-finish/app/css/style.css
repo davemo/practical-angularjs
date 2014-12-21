@@ -11,5 +11,68 @@ button {
 }
 
 body {
-  margin-top: 70px;
+  margin-top: 60px;
+  background: transparent url("/img/body-content-bg.jpg") 50% 0 repeat-y;
 }
+
+.card-builder-nav {
+  background: url("/img/nav-bg.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 98px;
+  bottom: 26px;
+}
+
+.card-builder-nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  margin: 0px 77px 0 77px;
+  padding-top: 34px;
+  font-family: "Bliz Quadrata", Times New Roman, Serif;
+  font-size: 20px;
+  color: rgb(252, 209, 68);
+  outline-color: rgb(252, 209, 68);
+}
+
+.card-builder-nav li {
+  float: left;
+  width: 170px;
+}
+
+.card-builder-nav li a {
+  display: block;
+  color: #fcd144;
+  text-shadow: 0 0 15px #000,
+              0 0 15px #000;
+  line-height: 38px;
+  height: 38px;
+  padding: 0;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+
+.card-builder-nav li.active a:hover,
+.card-builder-nav li a:hover {
+  color: #ffeba5;
+}
+
+.card-builder-nav li:not(.active) a:hover {
+  /*background-color: rgba(163,59,30, 0.3);*/
+  background-color: rgba(255,255,255, 0.25);
+  /*box-shadow: inset 0 0 10px rgba(163,59,30, 0.9);*/
+  /*box-shadow: inset 0 0 10px rgba(0,0,0, 0.3);*/
+}
+
+.card-builder-nav li.active a {
+  background: rgba(0,0,0,0.3);
+  border-left: 2px solid rgba(108,34,35, 0.3);
+  border-right: 2px solid rgba(108,34,35, 0.3);
+}
+
+.card-builder-nav li.active a {
+  color: #fff;
+}
+
+
+

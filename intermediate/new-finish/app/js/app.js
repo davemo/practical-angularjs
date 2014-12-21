@@ -76,8 +76,8 @@ app.config(function($routeProvider, $locationProvider) {
     }
   });
 
-  $routeProvider.when('/cards', {
-    templateUrl: 'cards.html',
+  $routeProvider.when('/hearthstone', {
+    templateUrl: 'hearthstone.html',
     controller: function($scope, cards) {
       $scope.cards = cards.data.cards;
     },
@@ -103,7 +103,7 @@ app.run(function ($rootScope, $http, AuthenticationService) {
 });
 
 app.run(function($rootScope, $location, AuthenticationService, FlashService) {
-  var routesThatRequireAuth = ['/cards', '/home'];
+  var routesThatRequireAuth = ['/hearthstone', '/home'];
 
   $rootScope.$on('$routeChangeStart', function(event, next, current) {
     if(_(routesThatRequireAuth).contains($location.path()) && !AuthenticationService.isLoggedIn()) {
@@ -187,14 +187,14 @@ app.factory("AuthenticationService", function($http, $sanitize, SessionService, 
 
 app.controller("LoginController", function($scope, $location, AuthenticationService) {
   if(AuthenticationService.isLoggedIn()) {
-    $location.path('/cards');
+    $location.path('/hearthstone');
   }
 
   $scope.credentials = { username: "", password: "" };
 
   $scope.login = function() {
     AuthenticationService.login($scope.credentials).success(function() {
-      $location.path('/cards');
+      $location.path('/hearthstone');
     });
   };
 });
