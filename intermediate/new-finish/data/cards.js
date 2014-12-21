@@ -1,4 +1,4 @@
-{
+module.exports = {
     "cards": [{
         "id": 7,
         "name": "Garrosh Hellscream",
@@ -10844,4 +10844,4 @@
         "set": "gvg",
         "effect_list": []
     }]
-}
+};

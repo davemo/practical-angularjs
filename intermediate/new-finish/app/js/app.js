@@ -1,5 +1,14 @@
 var app = angular.module("app", ['ngSanitize', 'ngRoute', 'ngResource']);
 
+app.service("HearthstoneService", function($http) {
+  return {
+    getCards: function() {
+      return $http.get('/cards');
+    }
+  };
+});
+
+
 app.config(function($httpProvider) {
 
   $httpProvider.interceptors.push(function($location, $q, SessionService, FlashService) {
@@ -63,6 +72,18 @@ app.config(function($routeProvider, $locationProvider) {
     resolve: {
       books: function(BookService) {
         return BookService.get();
+      }
+    }
+  });
+
+  $routeProvider.when('/hearthstone', {
+    templateUrl: 'templates/hearthstone.html',
+    controller: function($scope, cards) {
+      $scope.cards = cards.data.cards;
+    },
+    resolve: {
+      cards: function (HearthstoneService) {
+        return HearthstoneService.getCards();
       }
     }
   });

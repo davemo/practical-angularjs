@@ -12,12 +12,12 @@
       <div class="large-12">
         <h1>Practical Angular JS</h1>
         <div class="row" ng-hide="isLoggedOut()">
-          <div class="large-2 large-offset-5">
+          <div class="large-2 large-offset-5 column">
             <button ng-click="expireMySession()">Expire Session</button>
           </div>
         </div>
         <div class="row">
-          <div class="large-6 large-offset-3">
+          <div class="large-6 large-offset-3 column">
             <div id="flash" class="alert-box alert" ng-show="flash">
               {{ flash }}
             </div>
