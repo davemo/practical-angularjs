@@ -9,3 +9,7 @@ button {
 .books {
   list-style-type: none;
 }
+
+body {
+  margin-top: 70px;
+}

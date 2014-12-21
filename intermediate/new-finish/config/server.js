@@ -55,7 +55,7 @@ module.exports = {
       ]);
     });
 
-    app.get('/cards', function (req, res) {
+    app.get('/api/cards', function (req, res) {
       res.json(cards);
     });
 

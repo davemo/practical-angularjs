@@ -10,12 +10,27 @@
 
     <div class="row">
       <div class="large-12">
-        <h1>Practical Angular JS</h1>
-        <div class="row" ng-hide="isLoggedOut()">
-          <div class="large-2 large-offset-5 column">
-            <button ng-click="expireMySession()">Expire Session</button>
-          </div>
+        <div class="fixed">
+          <nav class="top-bar" data-topbar role="navigation">
+            <ul class="title-area">
+              <li class="name">
+                <h1><a href="#">Hearthstone Deck Builder</a></h1>
+              </li>
+               <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+              <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+
+            <section class="top-bar-section">
+              <!-- Right Nav Section -->
+              <ul class="right">
+                <li ng-hide="isLoggedOut()">
+                  <a href="#" ng-click="expireMySession()">Log Out</a>
+                </li>
+              </ul>
+            </section>
+          </nav>
         </div>
+
         <div class="row">
           <div class="large-6 large-offset-3 column">
             <div id="flash" class="alert-box alert" ng-show="flash">

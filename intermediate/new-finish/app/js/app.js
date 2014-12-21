@@ -3,7 +3,7 @@ var app = angular.module("app", ['ngSanitize', 'ngRoute', 'ngResource']);
 app.service("HearthstoneService", function($http) {
   return {
     getCards: function() {
-      return $http.get('/cards');
+      return $http.get('/api/cards');
     }
   };
 });
@@ -76,8 +76,8 @@ app.config(function($routeProvider, $locationProvider) {
     }
   });
 
-  $routeProvider.when('/hearthstone', {
-    templateUrl: 'hearthstone.html',
+  $routeProvider.when('/cards', {
+    templateUrl: 'cards.html',
     controller: function($scope, cards) {
       $scope.cards = cards.data.cards;
     },
@@ -103,7 +103,7 @@ app.run(function ($rootScope, $http, AuthenticationService) {
 });
 
 app.run(function($rootScope, $location, AuthenticationService, FlashService) {
-  var routesThatRequireAuth = ['/home'];
+  var routesThatRequireAuth = ['/cards', '/home'];
 
   $rootScope.$on('$routeChangeStart', function(event, next, current) {
     if(_(routesThatRequireAuth).contains($location.path()) && !AuthenticationService.isLoggedIn()) {
@@ -186,11 +186,15 @@ app.factory("AuthenticationService", function($http, $sanitize, SessionService, 
 });
 
 app.controller("LoginController", function($scope, $location, AuthenticationService) {
+  if(AuthenticationService.isLoggedIn()) {
+    $location.path('/cards');
+  }
+
   $scope.credentials = { username: "", password: "" };
 
   $scope.login = function() {
     AuthenticationService.login($scope.credentials).success(function() {
-      $location.path('/home');
+      $location.path('/cards');
     });
   };
 });
