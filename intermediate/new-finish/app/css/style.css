@@ -36,9 +36,22 @@ body {
   outline-color: rgb(252, 209, 68);
 }
 
+#card-filter ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#card-filter li {
+  float: left;
+  width: 60px;
+  height: 60px;
+}
+
 .card-builder-nav li {
   float: left;
-  width: 170px;
+  width: 160px;
 }
 
 .card-builder-nav li a {
@@ -100,5 +113,34 @@ body {
   position: relative;
 }
 
+#card-book {
+  height: 600px;
+  overflow-y: scroll;
+}
+
+#card-book:before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  right: 22px;
+  left: 22px;
+  pointer-events: none;
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.75);
+}
+
+#card-book:after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  right: 15px;
+  bottom: -8px;
+  left: 15px;
+  border: 8px solid #dec79b;
+  border-width: 17px 20px;
+  border-image: url("/img/artwork-frameV2.png") 17 20 stretch;
+  pointer-events: none;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
 
 
