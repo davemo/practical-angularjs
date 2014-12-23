@@ -34,10 +34,16 @@
     </div>
   </div>
   <div class="large-12 column">
+    <div class="hero-filter {{currentHeroFilter}}">
+      <span>{{currentHeroFilter | capitalize}}</span>
+    </div>
     <div id="card-book">
       <div class="card" ng-repeat="card in cards | filter:tableSearch">
         <img ng-src="{{card.image_url}}" alt="{{card.name}}">
       </div>
+    </div>
+    <div class="page-num">
+      <span>Page {{currentPage + 1}}</span>
     </div>
   </div>
   <div class="large-12 column">

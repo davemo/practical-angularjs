@@ -187,6 +187,12 @@ app.controller('HearthstoneController', function($scope, getCardsResponse) {
   });
 });
 
+app.filter('capitalize', function() {
+  return function(input) {
+    return input.charAt(0).toUpperCase() + input.slice(1);
+  };
+});
+
 app.run(function ($rootScope, $http, AuthenticationService) {
   $rootScope.expireMySession = function() {
     $http.get('/expire-my-session');

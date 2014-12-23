@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Belwe';
+  src: url('/belwe-bd-bt-bold.woff') format('woff');
+}
+
 h1,h2,h3,h4,h5 {
   text-align: center;
 }
@@ -13,6 +18,8 @@ button {
 body {
   margin-top: 60px;
   background: transparent url("/img/body-content-bg.jpg") 50% 0 repeat-y;
+  font-family: 'Belwe', sans-serif;
+  color: #625545;
 }
 
 .card-builder-nav {
@@ -114,23 +121,22 @@ body {
 }
 
 #card-book {
-  height: 670px;
+  height: 730px;
   overflow: hidden;
   background: url("/img/PageA.png"), url("/img/PageA.png"), url("/img/PageA.png");
   background-repeat: no-repeat, no-repeat, no-repeat;
-  background-size: 100% 112%, 100% 112%, 100%, 112%;
+  background-size: 95% 112%, 100% 110%, 100% 106%;
   background-color: black;
-  background-position-x: -62px, -42px, -22px;
-  background-position-y: 0px, 0px, 0px;
-  padding: 27px 92px 50px 20px;
+  background-position-x: -2px, -35px, -23px;
+  background-position-y: 0px, 6px, 14px;
+  padding: 77px 84px 50px 60px;
 }
 
 .card {
   float: left;
   width: 200px;
   height: 270px;
-  margin-top: 20px;
-  margin-right: 20px;
+  margin-right: 12px;
 }
 
 #card-book:before {
@@ -162,4 +168,56 @@ body {
   margin-top: 26px;
 }
 
+.page-num {
+  position: absolute;
+  left: 45%;
+  bottom: 25px;
+  font-size: 18px;
+}
+
+.hero-filter {
+  position: absolute;
+  left: 28%;
+  top: 13px;
+  color: #2a1803;
+  font-size: 21px;
+  background-image: url("/img/ClassHeaders.png");
+  padding-top: 25px;
+  width: 404px;
+  text-align: center;
+  background-size: 200%;
+  z-index: 0;
+  height: 85px;
+}
+
+.hero-filter.neutral {
+  background-position: 0px -8px;
+}
+.hero-filter.shaman {
+  background-position: 0px -108px;
+}
+.hero-filter.paladin {
+  background-position: 0px -210px;
+}
+.hero-filter.mage {
+  background-position: 0px -312px;
+}
+.hero-filter.druid {
+  background-position: 0px -413px;
+}
+.hero-filter.hunter {
+  background-position: 0px -513px;
+}
+.hero-filter.rogue {
+  background-position: 0px -613px;
+}
+.hero-filter.warrior {
+  background-position: 0px -715px;
+}
+.hero-filter.priest {
+  background-position: 403px -8px;
+}
+.hero-filter.warlock {
+  background-position: 403px -109px;
+}
 
