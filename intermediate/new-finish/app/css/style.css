@@ -22,6 +22,14 @@ body {
   color: #625545;
 }
 
+body, a {
+  cursor: url("/img/hand64.png"), auto !important;
+}
+
+body:active, a:active {
+  cursor: url("/img/hand64-rotated.png"), auto !important;
+}
+
 .card-builder-nav {
   background: url("/img/nav-bg.png");
   background-size: 100%;
@@ -121,7 +129,7 @@ body {
 }
 
 #card-book {
-  height: 730px;
+  height: 700px;
   overflow: hidden;
   background: url("/img/PageA.png"), url("/img/PageA.png"), url("/img/PageA.png");
   background-repeat: no-repeat, no-repeat, no-repeat;
@@ -137,6 +145,7 @@ body {
   width: 200px;
   height: 270px;
   margin-right: 12px;
+  -webkit-filter: drop-shadow(8px 8px 11px rgba(0,0,0,0.5));
 }
 
 #card-book:before {
