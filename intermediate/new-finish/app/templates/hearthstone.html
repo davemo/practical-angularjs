@@ -28,7 +28,7 @@
       <ul class="pagination">
         <li ng-class="{current:currentHeroFilter === heroFilter.value}"
             ng-repeat="heroFilter in heroFilterOptions">
-          <a href="" ng-click="filterByHero(heroFilter.value)">{{heroFilter.label}}</a>
+          <a href="" ng-click="filterCards(cardDB, 'hero', heroFilter.value)">{{heroFilter.label}}</a>
         </li>
       </ul>
     </div>
@@ -45,7 +45,7 @@
       <ul class="pagination">
         <li ng-class="{current:currentManaFilter === manaFilter.value}"
             ng-repeat="manaFilter in manaFilterOptions">
-          <a href="" ng-click="filterByManaCost(manaFilter.value)">{{manaFilter.label}}</a>
+          <a href="" ng-click="filterCards(cardDB, 'cost', manaFilter.value)">{{manaFilter.label}}</a>
         </li>
       </ul>
     </div>

@@ -91,14 +91,11 @@ app.config(function($routeProvider, $locationProvider) {
 });
 
 app.controller('HearthstoneController', function($scope, getCardsResponse) {
-  // var pageSize = 8;
-  // var currentPageIndex = 0;
-  var cardDB = getCardsResponse.data.cards;
-
-  // $scope.currentPage = _(cards).first(pageSize);
-  $scope.currentManaFilter = 'ALL';
+  $scope.cardDB = getCardsResponse.data.cards;
+  $scope.pageSize = 8;
+  $scope.currentPage = 0;
+  $scope.currentManaFilter = 'all';
   $scope.currentHeroFilter = 'neutral';
-
   $scope.heroFilterOptions = [
     {value: 'druid', label: 'Druid' },
     {value: 'hunter', label: 'Hunter' },
@@ -111,10 +108,9 @@ app.controller('HearthstoneController', function($scope, getCardsResponse) {
     {value: 'warrior', label: 'Warrior' },
     {value: 'neutral', label: 'Neutral' }
   ];
-
   // ALL, 0, 1, 2, 3, 4, 5, 6, 7+
   $scope.manaFilterOptions = [
-    {value: 'ALL', label: 'ALL'}
+    {value: 'all', label: 'ALL'}
   ].concat(
     _(_.range(0,6)).map(function(i) {
       return {
@@ -126,42 +122,69 @@ app.controller('HearthstoneController', function($scope, getCardsResponse) {
     {value: '7+', label: '7+' }
   );
 
-  $scope.filterByManaCost = function(cost) {
+  // the dataset has cards of types we don't want, like "hero" and "ability"
+  // we also want the values sorted ascending which is the default that .sortBy gives us
+  var filterCardsByManaCostAndHero = function(cards, cost, hero) {
+    return _(filterCardsByHero(filterCardsByManaCost(cards, cost), hero)).chain().filter(function(card) {
+      return _(["spell", "minion", "weapon", "secret"]).contains(card.category);
+    }).sortBy(function(c) {
+      return c.mana;
+    }).value();
+  };
+
+  // also updates the current value of the mana filter so the styling can update
+  var filterCardsByManaCost = function(cards, cost) {
     $scope.currentManaFilter = cost;
-    if(cost === 'ALL') {
-      $scope.cards = cardDB;
+    if(cost === 'all') {
+      return cards;
     } else if(cost === '7+') {
-      $scope.cards = _(cardDB).filter(function(c) {
+      return _(cards).filter(function(c) {
         return c.mana >= 7;
       });
     } else {
-      $scope.cards = _(cardDB).where({mana: cost});
+      return _(cards).where({mana: cost});
     }
   };
 
-  $scope.filterByHero = function(hero) {
+  // also updates the current value of the hero filter so the styling can update
+  var filterCardsByHero = function(cards, hero) {
     $scope.currentHeroFilter = hero;
-    $scope.cards = _(cardDB).where({hero:hero});
+    return _(cards).where({hero:hero});
   };
 
-  $scope.filterByHero('neutral');
+  var splitIntoPageGroups = function(cards) {
+    var result = _(cards).chain().groupBy(function(card, index) {
+      return Math.floor(index/$scope.pageSize);
+    }).toArray().value();
 
-  // $scope.goToPage = function(pageNum) {
-  //   currentPageIndex = pageNum;
-  //   $scope.currentPage = _($scope.cards.slice(pageSize * currentPageIndex)).first(pageSize);
-  // };
+    return result;
+  };
 
-  // $scope.nextPage = function() {
-  //   $scope.goToPage(currentPageIndex + 1);
-  // };
+  $scope.nextPage = function() {
+    $scope.currentPage += 1;
+  };
 
-  // $scope.prevPage = function() {
-  //   $scope.goToPage(currentPageIndex - 1);
-  // };
+  $scope.prevPage = function() {
+    $scope.currentPage -= 1;
+  };
 
-  // $scope.numPages = function() {
-  //   return Math.floor(_($scope.cards).size() / pageSize);
-  // };
+  $scope.filterCards = function(cards, filterType, filterValue) {
+    switch(filterType) {
+      case 'hero':
+        $scope.cards = splitIntoPageGroups(filterCardsByManaCostAndHero(cards, $scope.currentManaFilter, filterValue))[$scope.currentPage];
+        break;
+      case 'cost':
+        $scope.cards = splitIntoPageGroups(filterCardsByManaCostAndHero(cards, filterValue, $scope.currentHeroFilter))[$scope.currentPage];
+        break;
+      default:
+        break;
+    }
+  };
+
+  $scope.$watch('currentPage', function(newPage, oldPage) {
+    // console.log('currentPage changed (new, old)', newPage, oldPage);
+    $scope.cards = splitIntoPageGroups(filterCardsByManaCostAndHero($scope.cardDB, $scope.currentManaFilter, $scope.currentHeroFilter))[newPage];
+  });
 });
 
 app.run(function ($rootScope, $http, AuthenticationService) {
