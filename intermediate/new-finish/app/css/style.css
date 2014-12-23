@@ -114,8 +114,23 @@ body {
 }
 
 #card-book {
-  height: 600px;
-  overflow-y: scroll;
+  height: 670px;
+  overflow: hidden;
+  background: url("/img/PageA.png"), url("/img/PageA.png"), url("/img/PageA.png");
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-size: 100% 112%, 100% 112%, 100%, 112%;
+  background-color: black;
+  background-position-x: -62px, -42px, -22px;
+  background-position-y: 0px, 0px, 0px;
+  padding: 27px 92px 50px 20px;
+}
+
+.card {
+  float: left;
+  width: 200px;
+  height: 270px;
+  margin-top: 20px;
+  margin-right: 20px;
 }
 
 #card-book:before {
@@ -141,6 +156,10 @@ body {
   border-image: url("/img/artwork-frameV2.png") 17 20 stretch;
   pointer-events: none;
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+#card-book-mana-filter {
+  margin-top: 26px;
 }
 
 

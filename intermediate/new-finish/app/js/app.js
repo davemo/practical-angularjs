@@ -78,11 +78,9 @@ app.config(function($routeProvider, $locationProvider) {
 
   $routeProvider.when('/hearthstone', {
     templateUrl: 'hearthstone.html',
-    controller: function($scope, cards) {
-      $scope.cards = cards.data.cards;
-    },
+    controller: 'HearthstoneController',
     resolve: {
-      cards: function (HearthstoneService) {
+      getCardsResponse: function (HearthstoneService) {
         return HearthstoneService.getCards();
       }
     }
@@ -90,6 +88,80 @@ app.config(function($routeProvider, $locationProvider) {
 
   $routeProvider.otherwise({ redirectTo: '/login' });
 
+});
+
+app.controller('HearthstoneController', function($scope, getCardsResponse) {
+  // var pageSize = 8;
+  // var currentPageIndex = 0;
+  var cardDB = getCardsResponse.data.cards;
+
+  // $scope.currentPage = _(cards).first(pageSize);
+  $scope.currentManaFilter = 'ALL';
+  $scope.currentHeroFilter = 'neutral';
+
+  $scope.heroFilterOptions = [
+    {value: 'druid', label: 'Druid' },
+    {value: 'hunter', label: 'Hunter' },
+    {value: 'mage', label: 'Mage' },
+    {value: 'paladin', label: 'Paladin' },
+    {value: 'priest', label: 'Priest' },
+    {value: 'rogue', label: 'Rogue' },
+    {value: 'shaman', label: 'Shaman' },
+    {value: 'warlock', label: 'Warlock' },
+    {value: 'warrior', label: 'Warrior' },
+    {value: 'neutral', label: 'Neutral' }
+  ];
+
+  // ALL, 0, 1, 2, 3, 4, 5, 6, 7+
+  $scope.manaFilterOptions = [
+    {value: 'ALL', label: 'ALL'}
+  ].concat(
+    _(_.range(0,6)).map(function(i) {
+      return {
+        value: i,
+        label: i
+      };
+    })
+  ).concat(
+    {value: '7+', label: '7+' }
+  );
+
+  $scope.filterByManaCost = function(cost) {
+    $scope.currentManaFilter = cost;
+    if(cost === 'ALL') {
+      $scope.cards = cardDB;
+    } else if(cost === '7+') {
+      $scope.cards = _(cardDB).filter(function(c) {
+        return c.mana >= 7;
+      });
+    } else {
+      $scope.cards = _(cardDB).where({mana: cost});
+    }
+  };
+
+  $scope.filterByHero = function(hero) {
+    $scope.currentHeroFilter = hero;
+    $scope.cards = _(cardDB).where({hero:hero});
+  };
+
+  $scope.filterByHero('neutral');
+
+  // $scope.goToPage = function(pageNum) {
+  //   currentPageIndex = pageNum;
+  //   $scope.currentPage = _($scope.cards.slice(pageSize * currentPageIndex)).first(pageSize);
+  // };
+
+  // $scope.nextPage = function() {
+  //   $scope.goToPage(currentPageIndex + 1);
+  // };
+
+  // $scope.prevPage = function() {
+  //   $scope.goToPage(currentPageIndex - 1);
+  // };
+
+  // $scope.numPages = function() {
+  //   return Math.floor(_($scope.cards).size() / pageSize);
+  // };
 });
 
 app.run(function ($rootScope, $http, AuthenticationService) {

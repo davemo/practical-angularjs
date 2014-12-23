@@ -25,49 +25,29 @@
   </div>
   <div class="large-12 column">
     <div id="card-filter">
-      <ul>
-        <li>Druid</li>
-        <li>Hunter</li>
-        <li>Mage</li>
-        <li>Paladin</li>
-        <li>Priest</li>
-        <li>Rogue</li>
-        <li>Shaman</li>
-        <li>Warlock</li>
-        <li>Warrior</li>
-        <li>Neutral</li>
+      <ul class="pagination">
+        <li ng-class="{current:currentHeroFilter === heroFilter.value}"
+            ng-repeat="heroFilter in heroFilterOptions">
+          <a href="" ng-click="filterByHero(heroFilter.value)">{{heroFilter.label}}</a>
+        </li>
       </ul>
     </div>
   </div>
   <div class="large-12 column">
     <div id="card-book">
-      <div class="card">
-
+      <div class="card" ng-repeat="card in cards | filter:tableSearch">
+        <img ng-src="{{card.image_url}}" alt="{{card.name}}">
       </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Set</th>
-            <th>Hero</th>
-            <th>Description</th>
-            <th>Image</th>
-            <th>Category</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="card in cards | filter:tableSearch">
-            <td>{{card.name}}</td>
-            <td>{{card.set}}</td>
-            <td>{{card.hero}}</td>
-            <td>{{card.description}}</td>
-            <td>
-              <img ng-src="{{card.image_url}}" alt="{{card.name}}">
-            </td>
-            <td>{{card.category}}</td>
-          </tr>
-        </tbody>
-      </table>
+    </div>
+  </div>
+  <div class="large-12 column">
+    <div id="card-book-mana-filter">
+      <ul class="pagination">
+        <li ng-class="{current:currentManaFilter === manaFilter.value}"
+            ng-repeat="manaFilter in manaFilterOptions">
+          <a href="" ng-click="filterByManaCost(manaFilter.value)">{{manaFilter.label}}</a>
+        </li>
+      </ul>
     </div>
   </div>
 </div>
