@@ -146,6 +146,13 @@ body:active, a:active {
   height: 270px;
   margin-right: 12px;
   -webkit-filter: drop-shadow(8px 8px 11px rgba(0,0,0,0.5));
+  filter: drop-shadow(8px 8px 11px rgba(0,0,0,0.5));
+}
+
+.card:hover {
+  -webkit-filter: drop-shadow(0px 0px 10px rgba(255,255,255,1));
+  filter: drop-shadow(0px 0px 10px rgba(255,255,255,1));
+  /*box-shadow: 0px 0px 5px #fff;*/
 }
 
 #card-book:before {
@@ -229,4 +236,30 @@ body:active, a:active {
 .hero-filter.warlock {
   background-position: 403px -109px;
 }
+
+.prev-page {
+  cursor: url("/img/prev_page_64.png"), auto !important;
+}
+
+.next-page {
+  cursor: url("/img/next_page_64.png"), auto !important;
+}
+
+.prev-page {
+  position: absolute;
+  left: -35px;
+  top: 0;
+  width: 90px;
+  height: 100%;
+}
+
+.next-page {
+  position: absolute;
+  right: -15px;
+  top: 0;
+  width: 120px;
+  height: 100%;
+}
+
+
 

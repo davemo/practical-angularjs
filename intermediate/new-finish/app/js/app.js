@@ -1,4 +1,4 @@
-var app = angular.module("app", ['ngSanitize', 'ngRoute', 'ngResource']);
+var app = angular.module("app", ['ngSanitize', 'ngRoute', 'ngResource', 'ngAnimate']);
 
 app.service("HearthstoneService", function($http) {
   return {
