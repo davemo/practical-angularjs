@@ -277,6 +277,162 @@ body:active, a:active {
   margin-top: 26px;
 }
 
+#card-book-mana-filter ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#card-book-mana-filter ul li {
+  float: left;
+  margin-right: 6px;
+  -webkit-filter: drop-shadow(2px 2px 3px rgba(0,0,0,1.0));
+  filter: drop-shadow(2px 2px 3px rgba(0,0,0,1.0));
+  display: block;
+  height: 43px;
+  position: relative;
+}
+
+#card-book-mana-filter ul li:hover {
+  -webkit-filter: drop-shadow(2px 2px 5px rgba(142,233,239,1.0));
+  filter: drop-shadow(2px 2px 5px rgba(142,233,239,1.0));
+}
+
+#card-book-mana-filter ul li:active {
+  transform: scale(0.95);
+}
+
+#card-book-mana-filter li.all {
+  background: url("/img/ManaFilter.png") no-repeat;
+  background-size: 100%;
+  width: 90px;
+}
+
+#card-book-mana-filter li a {
+  color: white;
+}
+
+#card-book-mana-filter li {
+  background: url("/img/ManaFilterSingle.png") no-repeat;
+  background-size: 97%;
+  width: 40px;
+  background-position: 1px 0px;
+}
+
+#card-book-mana-filter li a {
+  display: block;
+  position: absolute;
+  top: 3px;
+  font-size: 19px;
+  right: 0px;
+  opacity: 0.95;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+#card-book-mana-filter li.seven-plus {
+  background: url("/img/ManaFilterSingle7Plus.png") no-repeat;
+  background-size: 107%;
+  width: 62px;
+  background-position-y: -2px;
+}
+
+#card-book-mana-filter li.seven-plus a {
+  right: -13px;
+  letter-spacing: 4px;
+  text-align: left;
+}
+
+#card-book-mana-filter li:before {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  background: url("/img/TextInlineImages.png") no-repeat;
+  width: 100%;
+  height: 100%;
+  background-position: -3px -118px;
+  background-size: 396%;
+}
+
+#card-book-mana-filter li.current:after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  background: url("/img/Mana_Glow_Full.png") no-repeat;
+  width: 94%;
+  height: 100%;
+  z-index: 4;
+  background-position: -8px -4px;
+  background-size: 140%;
+  left: 0px;
+  top: -5px;
+  opacity: 0.76;
+}
+
+#card-book-mana-filter li.seven-plus:before {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  background: url("/img/TextInlineImages.png") no-repeat;
+  width: 60%%;
+  height: 100%;
+  background-position: -4px -117px;
+  background-size: 423%;
+}
+
+#card-book-mana-filter li.seven-plus.current:after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  background: url("/img/Mana_Glow_Full.png") no-repeat;
+  width: 79%;
+  height: 100%;
+  z-index: 4;
+  background-position: -6px -6px;
+  background-size: 117%;
+  left: -5px;
+  top: -5px;
+  opacity: 0.76;
+}
+
+#card-book-mana-filter li.all a {
+  display: block;
+  position: absolute;
+  right: 15px;
+  top: 3px;
+  font-size: 18px;
+  font-weight: normal;
+  letter-spacing: 2px;
+  text-align: right;
+}
+
+#card-book-mana-filter li.all:before {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  background: url("/img/TextInlineImages.png") no-repeat;
+  width: 41%;
+  height: 100%;
+  background-position: -4px -117px;
+  background-size: 423%;
+}
+
+#card-book-mana-filter li.all.current:after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  background: url("/img/Mana_Glow_Full.png") no-repeat;
+  width: 53%;
+  height: 100%;
+  z-index: 4;
+  background-position: -6px -6px;
+  background-size: 117%;
+  left: -5px;
+  top: -5px;
+  opacity: 0.76;
+}
+
 .page-num {
   position: absolute;
   left: 45%;

@@ -119,7 +119,7 @@ app.controller('HearthstoneController', function($scope, getCardsResponse) {
       };
     })
   ).concat(
-    {value: '7+', label: '7+' }
+    {value: 'seven-plus', label: '7 +' }
   );
 
   // the dataset has cards of types we don't want, like "hero" and "ability"
@@ -137,7 +137,7 @@ app.controller('HearthstoneController', function($scope, getCardsResponse) {
     $scope.currentManaFilter = cost;
     if(cost === 'all') {
       return cards;
-    } else if(cost === '7+') {
+    } else if(cost === 'seven-plus') {
       return _(cards).filter(function(c) {
         return c.mana >= 7;
       });

@@ -51,8 +51,8 @@
   </div>
   <div class="large-12 column">
     <div id="card-book-mana-filter">
-      <ul class="pagination">
-        <li ng-class="{current:currentManaFilter === manaFilter.value}"
+      <ul>
+        <li class="{{manaFilter.value}}" ng-class="{current:currentManaFilter === manaFilter.value}"
             ng-repeat="manaFilter in manaFilterOptions">
           <a href="" ng-click="filterCards(cardDB, 'cost', manaFilter.value)">{{manaFilter.label}}</a>
         </li>
