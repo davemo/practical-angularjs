@@ -1,4 +1,4 @@
-<div id="hearthstone" class="row" ng-cloak>
+<div id="hearthstone" class="row">
   <div class="column large-12 text-center">
     <img src="/img/logo-small.png" height="178" width="435" alt="">
     <nav class="card-builder-nav" role="navigation">
@@ -25,15 +25,16 @@
   </div>
   <div class="large-12 column">
     <div id="card-filter">
-      <ul class="pagination">
-        <li ng-class="{current:currentHeroFilter === heroFilter.value}"
+      <ul>
+        <li class="{{heroFilter.value}}"
+            ng-class="{current:currentHeroFilter === heroFilter.value}"
             ng-repeat="heroFilter in heroFilterOptions">
-          <a href="" ng-click="filterCards(cardDB, 'hero', heroFilter.value)">{{heroFilter.label}}</a>
+          <a href="" ng-click="filterCards(cardDB, 'hero', heroFilter.value)"></a>
         </li>
       </ul>
     </div>
   </div>
-  <div class="large-12 column">
+  <div class="large-12 column" style="z-index: 1;">
     <div class="prev-page" ng-click="prevPage()"></div>
     <div class="hero-filter {{currentHeroFilter}}">
       <span>{{currentHeroFilter | capitalize}}</span>

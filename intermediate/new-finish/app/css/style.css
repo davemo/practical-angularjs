@@ -51,17 +51,110 @@ body:active, a:active {
   outline-color: rgb(252, 209, 68);
 }
 
+#card-filter {
+  padding: 0 20px;
+}
+
 #card-filter ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  overflow: hidden;
 }
 
 #card-filter li {
   float: left;
   width: 60px;
+  height: 50px;
+  background: url("/img/ClassIcons_ForTabs.png") no-repeat;
+  background-size: 600%;
+  background-color: black;
+  border-radius: 40px/15px;
+  margin-right: 12px;
+  box-shadow: 1px 4px 4px 3px rgba(0,0,0,0.75);
+  position: relative;
+  border: 2px solid black;
+  margin-bottom: -3px;
+}
+
+#card-filter li:before {
+  content: "";
+  background: url("/img/ArrowsCardCounts.png") no-repeat;
+  border: 6px solid rgba(234,188,109,1.0);
+  position: absolute;
+  width: 58px;
+  height: 120%;
+  pointer-events: none;
+  border-radius: 40px/15px;
+  top: -1px;
+  left: -1px;
+}
+
+#card-filter li:after {
+  content: "";
+  border: 3px solid rgba(255,246,136, 0.75);
+  position: absolute;
+  width: 53px;
+  height: 100%;
+  top: 2px;
+  border-radius: 40px/15px;
+  left: 1px;
+  box-shadow: inset 3px 2px 1px rgba(0,0,0,0.5);
+  pointer-events: none;
+}
+
+#card-filter li a {
+  display: block;
+  width: 60px;
   height: 60px;
+}
+
+#card-filter li:hover:before {
+  box-shadow: inset 0px 4px 24px rgba(0,0,0,1.0);
+}
+
+#card-filter li.current {
+  transform: scale(1.45);
+  margin-right: 0px;
+  z-index: 1;
+}
+
+#card-filter li.current + li {
+  margin-left: 11px;
+}
+
+#card-filter li.current:before {
+  box-shadow: inset 0px 4px 24px rgba(234,188,109,1.0);
+}
+
+#card-filter li.neutral {
+  background-position: -270px -82px;
+}
+#card-filter li.shaman {
+  background-position: -271px -7px;
+}
+#card-filter li.paladin {
+  background-position: -78px -11px;
+}
+#card-filter li.mage {
+  background-position: -10px -10px;
+}
+#card-filter li.druid {
+  background-position: -140px -80px;
+}
+#card-filter li.hunter {
+  background-position: -205px -81px;
+}
+#card-filter li.rogue {
+  background-position: -205px -8px;
+}
+#card-filter li.warrior {
+  background-position: -79px -76px;
+}
+#card-filter li.priest {
+  background-position: -141px -8px;
+}
+#card-filter li.warlock {
+  background-position: -9px -75px;
 }
 
 .card-builder-nav li {
