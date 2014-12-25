@@ -35,7 +35,7 @@
     </div>
   </div>
   <div class="large-12 column" style="z-index: 1;">
-    <div class="prev-page" ng-click="prevPage()"></div>
+    <div class="prev-page" ng-click="prevPage()" ng-show="canGoPrev()"></div>
     <div class="hero-filter {{currentHeroFilter}}">
       <span>{{currentHeroFilter | capitalize}}</span>
     </div>
@@ -47,7 +47,7 @@
     <div class="page-num">
       <span>Page {{currentPage + 1}}</span>
     </div>
-    <div class="next-page" ng-click="nextPage()"></div>
+    <div class="next-page" ng-click="nextPage()" ng-show="canGoNext()"></div>
   </div>
   <div class="large-12 column">
     <div id="card-book-mana-filter">

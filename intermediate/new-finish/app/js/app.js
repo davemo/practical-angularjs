@@ -94,6 +94,7 @@ app.controller('HearthstoneController', function($scope, getCardsResponse) {
   $scope.cardDB = getCardsResponse.data.cards;
   $scope.pageSize = 8;
   $scope.currentPage = 0;
+  $scope.totalPages  = 0;
   $scope.currentManaFilter = 'all';
   $scope.currentHeroFilter = 'neutral';
   $scope.heroFilterOptions = [
@@ -108,6 +109,15 @@ app.controller('HearthstoneController', function($scope, getCardsResponse) {
     {value: 'warrior', label: 'Warrior' },
     {value: 'neutral', label: 'Neutral' }
   ];
+
+  $scope.canGoNext = function() {
+    return $scope.currentPage < $scope.totalPages - 1;
+  };
+
+  $scope.canGoPrev = function() {
+    return $scope.currentPage - 1 >= 0;
+  };
+
   // ALL, 0, 1, 2, 3, 4, 5, 6, 7+
   $scope.manaFilterOptions = [
     {value: 'all', label: 'ALL'}
@@ -183,7 +193,9 @@ app.controller('HearthstoneController', function($scope, getCardsResponse) {
 
   $scope.$watch('currentPage', function(newPage, oldPage) {
     // console.log('currentPage changed (new, old)', newPage, oldPage);
-    $scope.cards = splitIntoPageGroups(filterCardsByManaCostAndHero($scope.cardDB, $scope.currentManaFilter, $scope.currentHeroFilter))[newPage];
+    var pages         = splitIntoPageGroups(filterCardsByManaCostAndHero($scope.cardDB, $scope.currentManaFilter, $scope.currentHeroFilter));
+    $scope.totalPages = pages.length;
+    $scope.cards      = pages[newPage];
   });
 });
 
