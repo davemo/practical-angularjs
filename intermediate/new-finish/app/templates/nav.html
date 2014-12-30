@@ -6,11 +6,14 @@
         <a ui-sref="cards">Cards</a>
       </li>
       <li ui-sref-active="active">
+        <a ui-sref="decks">My Decks</a>
+      </li>
+      <li ui-sref-active="active">
         <a ui-sref="admin">Admin</a>
       </li>
       <li id="search-input">
         <div class="search-bar">
-          <input type="text" id="search-field" placeholder="Search..." ng-model="tableSearch">
+          <input type="text" id="search-field" placeholder="Search..." ng-model="searchQuery" ng-change="searchQueryChanged(searchQuery)">
         </div>
       </li>
     </ul>

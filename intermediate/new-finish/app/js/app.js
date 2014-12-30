@@ -62,6 +62,14 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     }
   });
 
+  $stateProvider.state('decks', {
+    url: '/decks',
+    templateUrl: 'decks.html',
+    controller: function($scope) {
+      console.log('decks controller!');
+    }
+  });
+
   $stateProvider.state('list-of-books', {
     url: '/list-of-books',
     templateUrl: 'books.html',
@@ -110,6 +118,12 @@ app.controller('AdminController', function($scope, getCardsResponse) {
 });
 
 app.controller('HearthstoneController', function($scope, getCardsResponse) {
+
+  // to demonstrate $broadcast
+  // $scope.$on('search-query-changed', function(e, query) {
+  //   $scope.searchQuery = query;
+  // });
+
   $scope.cardDB = getCardsResponse.data.cards;
   $scope.pageSize = 8;
   $scope.currentPage = 0;
@@ -227,6 +241,12 @@ app.filter('capitalize', function() {
 app.run(function ($rootScope, $http, AuthenticationService) {
   $rootScope.expireMySession = function() {
     $http.get('/expire-my-session');
+  };
+
+  $rootScope.searchQueryChanged = function(query) {
+    $rootScope.searchQuery = query;
+    // to demonstrate event broadcasting
+    // $rootScope.$broadcast('search-query-changed', query);
   };
 
   $rootScope.isLoggedOut = function() {

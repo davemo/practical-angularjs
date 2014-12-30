@@ -1,6 +1,25 @@
 <div id="hearthstone" class="row">
   <ng-include src="'nav.html'"></ng-include>
   <div class="large-12 column">
-    ADMIN
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Health</th>
+          <th>Mana</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="card in cardDB | filter:searchQuery">
+          <td>{{card.id}}</td>
+          <td>{{card.name}}</td>
+          <td>{{card.category}}</td>
+          <td>{{card.health}}</td>
+          <td>{{card.mana}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

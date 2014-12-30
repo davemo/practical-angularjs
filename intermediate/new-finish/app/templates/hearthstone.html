@@ -17,7 +17,7 @@
       <span>{{currentHeroFilter | capitalize}}</span>
     </div>
     <div id="card-book">
-      <div class="card card-animation" ng-repeat="card in cards | filter:tableSearch">
+      <div class="card card-animation" ng-repeat="card in cards | filter:searchQuery">
         <img ng-src="{{card.image_url}}" alt="{{card.name}}">
       </div>
     </div>
