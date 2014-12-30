@@ -41,7 +41,7 @@
             </div>
           </div>
         </div>
-        <div id="view" ng-view></div>
+        <div id="view" ui-view></div>
       </div>
     </div>
   </body>

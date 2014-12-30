@@ -1,4 +1,4 @@
-var app = angular.module("app", ['ngSanitize', 'ngRoute', 'ngResource', 'ngAnimate']);
+var app = angular.module("app", ['ngSanitize', 'ngResource', 'ngAnimate', 'ui.router']);
 
 app.service("HearthstoneService", function($http) {
   return {
@@ -37,21 +37,33 @@ app.config(function($httpProvider) {
 
 });
 
-app.config(function($routeProvider, $locationProvider) {
+app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 
   $locationProvider.html5Mode(true);
 
-  $routeProvider.when('/login', {
+  $stateProvider.state('login', {
     templateUrl: 'login.html',
     controller: 'LoginController'
   });
 
-  $routeProvider.when('/home', {
+  $stateProvider.state('home', {
     templateUrl: 'home.html',
     controller: 'HomeController'
   });
 
-  $routeProvider.when('/list-of-books', {
+  $stateProvider.state('admin', {
+    url: '/admin',
+    templateUrl: 'admin.html',
+    controller: 'AdminController',
+    resolve: {
+      getCardsResponse: function (HearthstoneService) {
+        return HearthstoneService.getCards();
+      }
+    }
+  });
+
+  $stateProvider.state('list-of-books', {
+    url: '/list-of-books',
     templateUrl: 'books.html',
     controller: 'BooksController',
     resolve: {
@@ -61,12 +73,14 @@ app.config(function($routeProvider, $locationProvider) {
     }
   });
 
-  $routeProvider.when('/$resource/list-of-books', {
+  $stateProvider.state('$resource-list-of-books', {
+    url: '/$resource/list-of-books',
     templateUrl: 'books_resource.html',
     controller: 'BooksResourceController'
   });
 
-  $routeProvider.when('/$http/list-of-books', {
+  $stateProvider.state('$http-list-of-books', {
+    url: '/$http/list-of-books',
     templateUrl: 'books_http.html',
     controller: 'BooksHttpController',
     resolve: {
@@ -76,7 +90,8 @@ app.config(function($routeProvider, $locationProvider) {
     }
   });
 
-  $routeProvider.when('/hearthstone', {
+  $stateProvider.state('cards', {
+    url: '/cards',
     templateUrl: 'hearthstone.html',
     controller: 'HearthstoneController',
     resolve: {
@@ -86,8 +101,12 @@ app.config(function($routeProvider, $locationProvider) {
     }
   });
 
-  $routeProvider.otherwise({ redirectTo: '/login' });
+  $urlRouterProvider.otherwise('/login');
 
+});
+
+app.controller('AdminController', function($scope, getCardsResponse) {
+  $scope.cardDB = getCardsResponse.data.cards;
 });
 
 app.controller('HearthstoneController', function($scope, getCardsResponse) {

@@ -1,28 +1,5 @@
 <div id="hearthstone" class="row">
-  <div class="column large-12 text-center">
-    <img src="/img/logo-small.png" height="178" width="435" alt="">
-    <nav class="card-builder-nav" role="navigation">
-      <ul>
-        <li>
-          <a href="#">Heroes</a>
-        </li>
-        <li class="active">
-          <a href="#">Cards</a>
-        </li>
-        <li>
-          <a href="#">My Decks</a>
-        </li>
-        <li>
-          <a href="#">Pro Decks</a>
-        </li>
-        <li id="search-input">
-          <div class="search-bar">
-            <input type="text" id="search-field" placeholder="Search..." ng-model="tableSearch">
-          </div>
-        </li>
-      </ul>
-    </nav>
-  </div>
+  <ng-include src="'nav.html'"></ng-include>
   <div class="large-12 column">
     <div id="card-filter">
       <ul>
