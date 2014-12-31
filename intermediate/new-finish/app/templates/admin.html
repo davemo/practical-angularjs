@@ -1,25 +1,13 @@
-<div id="hearthstone" class="row">
+<div id="admin" class="row">
   <ng-include src="'nav.html'"></ng-include>
-  <div class="large-12 column">
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Category</th>
-          <th>Health</th>
-          <th>Mana</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="card in cardDB | filter:searchQuery">
-          <td>{{card.id}}</td>
-          <td>{{card.name}}</td>
-          <td>{{card.category}}</td>
-          <td>{{card.health}}</td>
-          <td>{{card.mana}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <card-editor>
+    <card-editor-columns>
+      <column title="ID"       field="id"></column>
+      <column title="Name"     field="name"></column>
+      <column title="Category" field="category"></column>
+      <column title="Health"   field="health"></column>
+      <column title="Mana"     field="mana"></column>
+    </card-editor-columns>
+    <card-editor-rows with-inline-editor source="/api/other-cards"></card-editor-rows>
+  </card-editor>
 </div>

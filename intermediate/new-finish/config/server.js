@@ -59,5 +59,9 @@ module.exports = {
       res.json(cards);
     });
 
+    app.get('/api/other-cards', function (req, res) {
+      res.json(cards);
+    });
+
   }
 };

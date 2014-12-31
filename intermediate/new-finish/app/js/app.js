@@ -1,9 +1,10 @@
 var app = angular.module("app", ['ngSanitize', 'ngResource', 'ngAnimate', 'ui.router']);
 
 app.service("HearthstoneService", function($http) {
+  var defaultUrl = '/api/cards';
   return {
-    getCards: function() {
-      return $http.get('/api/cards');
+    getCards: function(url) {
+      return $http.get(url ? url : defaultUrl);
     }
   };
 });
@@ -37,6 +38,109 @@ app.config(function($httpProvider) {
 
 });
 
+app.directive('cardEditor', function() {
+  return {
+    restrict: 'E',
+    transclude: true,
+    controllerAs: 'cardEditor',
+    templateUrl: 'cardEditor.html',
+    controller: function($scope) {
+      console.log('cardEditor controller');
+      var renderingOptions = {};
+
+      this.setColumns = function(columns) {
+        renderingOptions.columns = columns;
+      };
+
+      this.getColumns = function() {
+        return renderingOptions.columns;
+      };
+
+      this.setInlineEditor = function(editor) {
+        renderingOptions.editor = editor;
+      };
+
+      this.setRows = function(rows) {
+        renderingOptions.rows = rows;
+      };
+
+      this.getRows = function() {
+        return renderingOptions.rows;
+      };
+
+      this.getRenderingOptions = function() {
+        return renderingOptions;
+      };
+    },
+    link: function(scope, element, attrs, cardEditor) {
+      console.log('linked card-editor');
+    }
+  };
+});
+
+app.directive('cardEditorColumns', function() {
+  return {
+    restrict: 'E',
+    require: ['^cardEditor', 'cardEditorColumns'],
+    controller: function($scope) {
+      this.columns = [];
+    },
+    link: function(scope, element, attrs, controllers) {
+      var cardEditor = controllers[0],
+          cardEditorColumns = controllers[1];
+      console.log('linked card-editor-columns');
+      cardEditor.setColumns(cardEditorColumns.columns);
+    }
+  };
+});
+
+app.directive('column', function() {
+  return {
+    restrict: 'E',
+    require: '^cardEditorColumns',
+    controller: function($scope) {
+
+    },
+    link: function(scope, element, attrs, cardEditorColumns) {
+      console.log('linked column', attrs.title);
+      cardEditorColumns.columns.push({
+        title: attrs.title,
+        field: attrs.field
+      });
+    }
+  };
+});
+
+app.directive('cardEditorRows', function(HearthstoneService) {
+  return {
+    restrict: 'E',
+    require: '^cardEditor',
+    controller: function($scope) {
+
+    },
+    link: function(scope, element, attrs, cardEditor) {
+      console.log('linked card-editor-rows');
+      HearthstoneService.getCards(attrs.source).then(function(response) {
+        cardEditor.setRows(response.data.cards);
+      });
+    }
+  };
+});
+
+app.directive('withInlineEditor', function() {
+  return {
+    restrict: 'A',
+    require: '^cardEditor',
+    controller: function($scope) {},
+    link: function(scope, element, attrs, cardEditor) {
+      console.log('linked with-inline-editor');
+    }
+  };
+
+});
+
+
+
 app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 
   $locationProvider.html5Mode(true);
@@ -54,12 +158,12 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   $stateProvider.state('admin', {
     url: '/admin',
     templateUrl: 'admin.html',
-    controller: 'AdminController',
-    resolve: {
-      getCardsResponse: function (HearthstoneService) {
-        return HearthstoneService.getCards();
-      }
-    }
+    controller: 'AdminController'
+    // resolve: {
+    //   getCardsResponse: function (HearthstoneService) {
+    //     return HearthstoneService.getCards();
+    //   }
+    // }
   });
 
   $stateProvider.state('decks', {
@@ -113,8 +217,8 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 
 });
 
-app.controller('AdminController', function($scope, getCardsResponse) {
-  $scope.cardDB = getCardsResponse.data.cards;
+app.controller('AdminController', function($scope) {
+  // $scope.cardDB = getCardsResponse.data.cards;
 });
 
 app.controller('HearthstoneController', function($scope, getCardsResponse) {

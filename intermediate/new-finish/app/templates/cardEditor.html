@@ -1,0 +1,17 @@
+<div class="large-12 column">
+  <table>
+    <thead>
+      <tr>
+        <th ng-repeat="column in cardEditor.getColumns()">{{column.name}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="card in cardEditor.getRows() | filter:searchQuery">
+        <td ng-repeat="column in cardEditor.getColumns()">
+          {{card[column.field]}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ng-transclude></ng-transclude>
+</div>
