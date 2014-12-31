@@ -213,6 +213,17 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     }
   });
 
+  $stateProvider.state('cards.detail', {
+    url: '/:id',
+    onEnter: function($stateParams) {
+      console.log($stateParams.id);
+      console.log('entered cards.detail');
+    },
+    onExit: function() {
+      console.log('exited cards.detail');
+    }
+  });
+
   $urlRouterProvider.otherwise('/login');
 
 });
@@ -221,7 +232,7 @@ app.controller('AdminController', function($scope) {
   // $scope.cardDB = getCardsResponse.data.cards;
 });
 
-app.controller('HearthstoneController', function($scope, getCardsResponse) {
+app.controller('HearthstoneController', function($scope, $state, $rootScope, getCardsResponse) {
 
   // to demonstrate $broadcast
   // $scope.$on('search-query-changed', function(e, query) {
@@ -253,6 +264,11 @@ app.controller('HearthstoneController', function($scope, getCardsResponse) {
 
   $scope.canGoPrev = function() {
     return $scope.currentPage - 1 >= 0;
+  };
+
+  $scope.detailViewFor = function(card) {
+    $state.go('cards.detail', {id: card.id});
+    $rootScope.detailCard = card;
   };
 
   // ALL, 0, 1, 2, 3, 4, 5, 6, 7+
@@ -342,7 +358,7 @@ app.filter('capitalize', function() {
   };
 });
 
-app.run(function ($rootScope, $http, AuthenticationService) {
+app.run(function ($rootScope, $state, $http, AuthenticationService) {
   $rootScope.expireMySession = function() {
     $http.get('/expire-my-session');
   };
@@ -356,6 +372,8 @@ app.run(function ($rootScope, $http, AuthenticationService) {
   $rootScope.isLoggedOut = function() {
     return !AuthenticationService.isLoggedIn();
   };
+
+  $rootScope.$state = $state;
 });
 
 app.run(function($rootScope, $location, AuthenticationService, FlashService) {

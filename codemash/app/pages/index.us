@@ -2,7 +2,7 @@
 <html lang="en" ng-app="app">
   <head>
     <base href="/">
-    <title>Practical AngularJS</title>
+    <title>Hearthstone Deck Builder</title>
     <link rel="stylesheet" type="text/css" href="<%= css %>" media="all" />
     <script type="text/javascript" src="<%= js %>"></script>
   </head>
@@ -43,6 +43,16 @@
         </div>
         <div id="view" ui-view></div>
       </div>
+
+      <div class="detail-view detail-view-animation"
+           ng-show="$state.is('cards.detail')"
+           ng-click="$state.go('cards')">
+              <img ng-src="{{detailCard.image_url}}" />
+              <div class="card-back"></div>
+      </div>
+
     </div>
+
+
   </body>
 </html>

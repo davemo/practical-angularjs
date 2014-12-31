@@ -13,3 +13,8 @@
   /*transform: scale(1);*/
   /*opacity: 1;*/
 }
+
+.detail-view-animation {
+  /*transition: all 0.5s linear;*/
+  /*transform: scale(0.25);*/
+}

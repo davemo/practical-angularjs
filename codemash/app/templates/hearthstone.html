@@ -1,4 +1,4 @@
-<div id="hearthstone" class="row">
+<div id="hearthstone" class="row" ng-class="{blurred: $state.is('cards.detail')}">
   <ng-include src="'nav.html'"></ng-include>
   <div class="large-12 column">
     <div id="card-filter">
@@ -17,7 +17,7 @@
       <span>{{currentHeroFilter | capitalize}}</span>
     </div>
     <div id="card-book">
-      <div class="card card-animation" ng-repeat="card in cards | filter:searchQuery">
+      <div class="card card-animation" ng-click="detailViewFor(card)" ng-repeat="card in cards | filter:searchQuery">
         <img ng-src="{{card.image_url}}" alt="{{card.name}}">
       </div>
     </div>

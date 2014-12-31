@@ -510,5 +510,39 @@ body:active, a:active {
   height: 100%;
 }
 
+.detail-view {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1040;
+}
 
+.detail-view img {
+  width: 400px;
+  transform: rotate(0deg);
+  z-index: 1060;
+  position: absolute;
+  left: calc(50% - 200px);
+  top: calc(50% - 400px);
+}
 
+.blurred {
+  -webkit-filter: blur(3px);
+  filter: blur(3px);
+}
+
+.card-back {
+  background: url("/img/Card_Back_Goblin.png") no-repeat;
+  width: 349px;
+  height: 520px;
+  transform: rotate(-10deg) scale(0.9);
+  position: absolute;
+  top: calc(50% - 240px);
+  z-index: 9;
+  border-radius: 27px;
+  background-size: 151%;
+  background-position: -90px -10px;
+  lefT: calc(50% - 280px);
+}
