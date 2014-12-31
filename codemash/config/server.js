@@ -47,14 +47,6 @@ module.exports = {
       res.json({error: { message: 'Session Expired' }}, 403);
     });
 
-    app.get('/books', function(req, res) {
-      res.json([
-        {title: 'Great Expectations', author: 'Dickens'},
-        {title: 'Foundation Series', author: 'Asimov'},
-        {title: 'Treasure Island', author: 'Stephenson'}
-      ]);
-    });
-
     app.get('/api/cards', function (req, res) {
       res.json(cards);
     });

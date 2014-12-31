@@ -1,17 +1,6 @@
-var app = angular.module("app", ['ngSanitize', 'ngResource', 'ngAnimate', 'ui.router']);
-
-app.service("HearthstoneService", function($http) {
-  var defaultUrl = '/api/cards';
-  return {
-    getCards: function(url) {
-      return $http.get(url ? url : defaultUrl);
-    }
-  };
-});
-
+var app = angular.module("app", ['ngSanitize', 'ngAnimate', 'ui.router']);
 
 app.config(function($httpProvider) {
-
   $httpProvider.interceptors.push(function($location, $q, SessionService, FlashService) {
     return {
       response: function(response) {
@@ -35,135 +24,16 @@ app.config(function($httpProvider) {
       },
     };
   });
-
 });
-
-app.directive('cardEditor', function() {
-  return {
-    restrict: 'E',
-    transclude: true,
-    controllerAs: 'cardEditor',
-    templateUrl: 'cardEditor.html',
-    controller: function($scope) {
-      console.log('cardEditor controller');
-      var renderingOptions = {};
-
-      this.setColumns = function(columns) {
-        renderingOptions.columns = columns;
-      };
-
-      this.getColumns = function() {
-        return renderingOptions.columns;
-      };
-
-      this.setInlineEditor = function(editor) {
-        renderingOptions.editor = editor;
-      };
-
-      this.setRows = function(rows) {
-        renderingOptions.rows = rows;
-      };
-
-      this.getRows = function() {
-        return renderingOptions.rows;
-      };
-
-      this.getRenderingOptions = function() {
-        return renderingOptions;
-      };
-    },
-    link: function(scope, element, attrs, cardEditor) {
-      console.log('linked card-editor');
-    }
-  };
-});
-
-app.directive('cardEditorColumns', function() {
-  return {
-    restrict: 'E',
-    require: ['^cardEditor', 'cardEditorColumns'],
-    controller: function($scope) {
-      this.columns = [];
-    },
-    link: function(scope, element, attrs, controllers) {
-      var cardEditor = controllers[0],
-          cardEditorColumns = controllers[1];
-      console.log('linked card-editor-columns');
-      cardEditor.setColumns(cardEditorColumns.columns);
-    }
-  };
-});
-
-app.directive('column', function() {
-  return {
-    restrict: 'E',
-    require: '^cardEditorColumns',
-    controller: function($scope) {
-
-    },
-    link: function(scope, element, attrs, cardEditorColumns) {
-      console.log('linked column', attrs.title);
-      cardEditorColumns.columns.push({
-        title: attrs.title,
-        field: attrs.field
-      });
-    }
-  };
-});
-
-app.directive('cardEditorRows', function(HearthstoneService) {
-  return {
-    restrict: 'E',
-    require: '^cardEditor',
-    controller: function($scope) {
-
-    },
-    link: function(scope, element, attrs, cardEditor) {
-      console.log('linked card-editor-rows');
-      HearthstoneService.getCards(attrs.source).then(function(response) {
-        cardEditor.setRows(response.data.cards);
-      });
-    }
-  };
-});
-
-app.directive('withInlineEditor', function() {
-  return {
-    restrict: 'A',
-    require: '^cardEditor',
-    controller: function($scope) {},
-    link: function(scope, element, attrs, cardEditor) {
-      console.log('linked with-inline-editor');
-    }
-  };
-
-});
-
-
 
 app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 
   $locationProvider.html5Mode(true);
 
   $stateProvider.state('login', {
+    url: '/login',
     templateUrl: 'login.html',
     controller: 'LoginController'
-  });
-
-  $stateProvider.state('home', {
-    templateUrl: 'home.html',
-    controller: 'HomeController'
-  });
-
-  $stateProvider.state('admin', {
-    url: '/admin',
-    templateUrl: 'admin.html',
-    controller: 'AdminController'
-    // resolve: {
-    //   getCardsResponse: function (HearthstoneService) {
-    //     return HearthstoneService.getCards();
-    //   }
-    // }
   });
 
   $stateProvider.state('decks', {
@@ -174,37 +44,17 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     }
   });
 
-  $stateProvider.state('list-of-books', {
-    url: '/list-of-books',
-    templateUrl: 'books.html',
-    controller: 'BooksController',
-    resolve: {
-      books : function(BookService) {
-        return BookService.get();
-      }
-    }
-  });
-
-  $stateProvider.state('$resource-list-of-books', {
-    url: '/$resource/list-of-books',
-    templateUrl: 'books_resource.html',
-    controller: 'BooksResourceController'
-  });
-
-  $stateProvider.state('$http-list-of-books', {
-    url: '/$http/list-of-books',
-    templateUrl: 'books_http.html',
-    controller: 'BooksHttpController',
-    resolve: {
-      books: function(BookService) {
-        return BookService.get();
-      }
+  $stateProvider.state('admin', {
+    url: '/admin',
+    templateUrl: 'admin.html',
+    controller: function($scope) {
+      console.log('admin controller!');
     }
   });
 
   $stateProvider.state('cards', {
     url: '/cards',
-    templateUrl: 'hearthstone.html',
+    templateUrl: 'cards.html',
     controller: 'HearthstoneController',
     resolve: {
       getCardsResponse: function (HearthstoneService) {
@@ -228,8 +78,18 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 
 });
 
-app.controller('AdminController', function($scope) {
-  // $scope.cardDB = getCardsResponse.data.cards;
+app.controller("LoginController", function($scope, $location, AuthenticationService) {
+  if(AuthenticationService.isLoggedIn()) {
+    $location.path('/cards');
+  }
+
+  $scope.credentials = { username: "", password: "" };
+
+  $scope.login = function() {
+    AuthenticationService.login($scope.credentials).success(function() {
+      $location.path('/cards');
+    });
+  };
 });
 
 app.controller('HearthstoneController', function($scope, $state, $rootScope, getCardsResponse) {
@@ -377,9 +237,9 @@ app.run(function ($rootScope, $state, $http, AuthenticationService) {
 });
 
 app.run(function($rootScope, $location, AuthenticationService, FlashService) {
-  var routesThatRequireAuth = ['/hearthstone', '/home'];
+  var routesThatRequireAuth = ['/cards', '/home'];
 
-  $rootScope.$on('$routeChangeStart', function(event, next, current) {
+  $rootScope.$on('$locationChangeStart', function(event, next, current) {
     if(_(routesThatRequireAuth).contains($location.path()) && !AuthenticationService.isLoggedIn()) {
       $location.path('/login');
       FlashService.show("Please log in to continue.");
@@ -387,16 +247,14 @@ app.run(function($rootScope, $location, AuthenticationService, FlashService) {
   });
 });
 
-app.factory("BookService", function($http) {
+
+app.factory("HearthstoneService", function($http) {
+  var defaultUrl = '/api/cards';
   return {
-    get: function() {
-      return $http.get('/books');
+    getCards: function(url) {
+      return $http.get(url ? url : defaultUrl);
     }
   };
-});
-
-app.factory("BookResource", function($q, $resource) {
-  return $resource('/books');
 });
 
 app.factory("FlashService", function($rootScope) {
@@ -455,62 +313,6 @@ app.factory("AuthenticationService", function($http, $sanitize, SessionService, 
     },
     isLoggedIn: function() {
       return SessionService.get('authenticated');
-    }
-  };
-});
-
-app.controller("LoginController", function($scope, $location, AuthenticationService) {
-  if(AuthenticationService.isLoggedIn()) {
-    $location.path('/hearthstone');
-  }
-
-  $scope.credentials = { username: "", password: "" };
-
-  $scope.login = function() {
-    AuthenticationService.login($scope.credentials).success(function() {
-      $location.path('/hearthstone');
-    });
-  };
-});
-
-app.controller("BooksController", function($scope, books) {
-  $scope.books = books.data;
-});
-
-app.controller("BooksResourceController", function ($scope, BookResource) {
-  // because the stubbed endpoint returns an array of results, .query() is used
-  // if the endpoint returned an object, you would use .get()
-  $scope.books = BookResource.query();
-});
-
-app.controller("BooksHttpController", function ($scope, books) {
-  $scope.books = books;
-});
-
-app.controller("HomeController", function($scope, $location, AuthenticationService) {
-  $scope.title = "Awesome Home";
-  $scope.message = "Mouse Over these images to see a directive at work!";
-
-  $scope.logout = function() {
-    AuthenticationService.logout().success(function() {
-      $location.path('/login');
-    });
-  };
-});
-
-app.directive("showsMessageWhenHovered", function() {
-  return {
-    restrict: "A", // A = Attribute, C = CSS Class, E = HTML Element, M = HTML Comment
-    link: function(scope, element, attributes) {
-      var originalMessage = scope.message;
-      element.bind("mouseenter", function() {
-        scope.message = attributes.message;
-        scope.$apply();
-      });
-      element.bind("mouseleave", function() {
-        scope.message = originalMessage;
-        scope.$apply();
-      });
     }
   };
 });

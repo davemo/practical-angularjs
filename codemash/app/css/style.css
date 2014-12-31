@@ -259,7 +259,13 @@ body:active, a:active {
   box-shadow: inset 0 0 40px rgba(0,0,0,0.75);
 }
 
-#card-book:after {
+.artwork-frame {
+  min-height: 500px;
+  margin-top: 47px;
+  padding: 10px 30px;
+}
+
+#card-book:after, .artwork-frame:after {
   content: "";
   position: absolute;
   top: -8px;
