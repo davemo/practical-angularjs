@@ -41,11 +41,8 @@
             </div>
           </div>
         </div> -->
-        <div id="view"></div>
+        <div id="view" ui-view></div>
       </div>
-
-      <div class="detail-view detail-view-animation"></div>
-
     </div>
 
 
