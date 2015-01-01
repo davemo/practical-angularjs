@@ -7,7 +7,7 @@ This workshop, prepared for a CodeMash 2015 precompiler, is designed to educate 
 - Install [Node.JS](http://nodejs.org/) for your platform of choice
 - Install [LinemanJS](http://www.linemanjs.com) globally `npm i -g lineman`
 - Clone `git clone https://github.com/davemo/practical-angularjs.git` or [Download](https://github.com/davemo/practical-angularjs/archive/master.zip) this repo
-- Navigate to the project directory and install the dependencies from `package.json` - `cd practical-angularjs && npm i`
+- Navigate to the project directory and install the dependencies from `package.json` - `cd practical-angularjs/start && npm i`
 - Run the app with `lineman run`
 
 ## Hearthstone Deck Browser

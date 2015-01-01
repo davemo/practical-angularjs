@@ -1,0 +1,39 @@
+<div id="cards" class="row" ng-class="{blurred: $state.is('cards.detail')}">
+  <ng-include src="'nav.html'"></ng-include>
+  <div class="large-12 column">
+    <div id="card-filter">
+      <ul>
+        <li class="{{heroFilter.value}}"
+            ng-class="{current:currentHeroFilter === heroFilter.value}"
+            ng-repeat="heroFilter in heroFilterOptions">
+          <a href="" ng-click="filterCards(cardDB, 'hero', heroFilter.value)"></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="large-12 column" style="z-index: 1;">
+    <div class="prev-page" ng-click="prevPage()" ng-show="canGoPrev()"></div>
+    <div class="hero-filter {{currentHeroFilter}}">
+      <span>{{currentHeroFilter | capitalize}}</span>
+    </div>
+    <div id="card-book">
+      <div class="card card-animation" ng-click="detailViewFor(card)" ng-repeat="card in cards | filter:searchQuery">
+        <img ng-src="{{card.image_url}}" alt="{{card.name}}">
+      </div>
+    </div>
+    <div class="page-num">
+      <span>Page {{currentPage + 1}}</span>
+    </div>
+    <div class="next-page" ng-click="nextPage()" ng-show="canGoNext()"></div>
+  </div>
+  <div class="large-12 column">
+    <div id="card-book-mana-filter">
+      <ul>
+        <li class="{{manaFilter.value}}" ng-class="{current:currentManaFilter === manaFilter.value}"
+            ng-repeat="manaFilter in manaFilterOptions">
+          <a href="" ng-click="filterCards(cardDB, 'cost', manaFilter.value)">{{manaFilter.label}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

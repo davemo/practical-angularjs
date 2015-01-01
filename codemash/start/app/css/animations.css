@@ -1,0 +1,20 @@
+.card.ng-enter {
+  /*transition: all 0.5s linear;*/
+  /*transform: scale(0.75);*/
+  /*opacity: 0.25;*/
+}
+
+/*.card.ng-enter-stagger {
+  transition-delay: 0.1s;
+  transition-duration: 0s;
+}*/
+
+.card.ng-enter-active {
+  /*transform: scale(1);*/
+  /*opacity: 1;*/
+}
+
+.detail-view-animation {
+  /*transition: all 0.5s linear;*/
+  /*transform: scale(0.25);*/
+}

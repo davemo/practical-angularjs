@@ -1,0 +1,21 @@
+<div class="column large-12 text-center">
+  <img src="/img/logo-small.png" height="178" width="435" alt="">
+  <nav class="card-builder-nav" role="navigation">
+    <ul>
+      <li ui-sref-active="active">
+        <a ui-sref="cards">Cards</a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="decks">My Decks</a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="admin">Admin</a>
+      </li>
+      <li id="search-input">
+        <div class="search-bar">
+          <input type="text" id="search-field" placeholder="Search..." ng-model="searchQuery" ng-change="searchQueryChanged(searchQuery)">
+        </div>
+      </li>
+    </ul>
+  </nav>
+</div>

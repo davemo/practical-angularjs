@@ -1,0 +1,17 @@
+{
+  "name": "new-finish",
+  "description": "An HTML/JS/CSS app",
+  "version": "0.0.1",
+  "private": true,
+  "author": "John Doe",
+  "devDependencies": {
+    "csrf": "^2.0.2",
+    "express": "^3.4.0",
+    "lineman": "^0.34.3",
+    "lineman-angular": "^0.3.0"
+  },
+  "scripts": {
+    "start": "lineman run",
+    "test": "lineman spec-ci"
+  }
+}
