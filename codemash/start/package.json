@@ -13,5 +13,11 @@
   "scripts": {
     "start": "lineman run",
     "test": "lineman spec-ci"
-  }
+  },
+  "angularPreload": [
+    {
+      "constantName":"CARD_DATABASE",
+      "filePath":"data/cards.json"
+    }
+  ]
 }

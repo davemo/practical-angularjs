@@ -27,8 +27,8 @@
   <div class="large-12 column">
     <div id="card-book-mana-filter">
       <ul>
-        <li>
-          <a href=""></a>
+        <li ng-repeat="mana in CardFilter.manaFilters">
+          <a href="" ng-click="CardFilter.filterByMana(mana.value)">{{mana.label}}</a>
         </li>
       </ul>
     </div>

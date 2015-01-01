@@ -15,6 +15,10 @@ module.exports = function(lineman) {
   //Override application configuration here. Common examples follow in the comments.
   return {
 
+    appendTasks: {
+        common: ["angularPreload"]
+    },
+
     server: {
         pushState: true
     }

@@ -64,7 +64,7 @@ Goal: understand how to load and render JSON data from a remote api
 Angular Concepts: `$http`, `ng-repeat`, `ng-src`, `angular expression syntax`, `$scope`, `controller`, `controllerAs`, `route.resolve`
 
 * Provided: css, templates without angular directives, card-images, card data as JSON and server-side routes (`GET /api/cards`), `<div id="card-book">` element
-* Pair off and use the `resolve` property of our `cards` route to load card data from `GET /api/cards`
+* Pair off and use the `resolve` property of our `cards` route to load card data from `GET /api/cards` (see the [ui-router docs on resolve](https://github.com/angular-ui/ui-router/wiki#resolve))
 * Create a controller using `angular.module('app').controller` and attach card data to the `$scope`
 * Use `ng-repeat` to render card meta data and the `card.image_url` into the `<div id="card-book">` element in `cards.html` using `ng-src` for the image.
 
@@ -75,6 +75,7 @@ Goal: showcase angular controllers as the introductory spot for experimenting wi
 Angular Concepts: `$scope.$watch`, `$scope.$broadcast`, `$filter`, `ng-click`, `dependency injection`, `angular.factory`, `angular.service`
 
 * Provided: css, templates without angular directives, `CardFilter` service with public method `.filterCards(cardDB:array, criteria:string, filterValue:integer)`, and `.heroFilterOptions` and `.manaFilterOptions` properties
+* Set up an `ng-model="searchQuery"` on the `input#search-field` element in `nav.html` and use the angular filter expression `|` character to filter the result set
 * Pair off and inject the `CardFilter` service into your controller for the `cards` page. Use the `.filterCards` method to filter cards by Hero and by Mana Cost
 * Set up a `$scope.$watch` on the `currentPage` property and bind `$scope.cards` to `CardFilter.splitIntoPageGroups` at the value of the newPage
 
