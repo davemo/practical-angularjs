@@ -7,7 +7,8 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 
   $stateProvider.state('cards', {
     url: "/cards",
-    templateUrl: "cards.html"
+    templateUrl: "cards.html",
+    controller: "CardsController"
   });
 
   // default route
@@ -16,4 +17,15 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 
   // admin, decks
 
+});
+
+app.controller("CardsController", function($scope, $http) {
+
+  // fetch the cards from our API
+  $http.get("/api/cards").success(function(response) {
+    // attach them to the $scope
+    $scope.cards = response.cards;
+  });
+
+  // iterate over them in the template to render images
 });

@@ -15,8 +15,8 @@
       <span></span>
     </div>
     <div id="card-book">
-      <div class="card card-animation">
-        <img alt="">
+      <div ng-repeat="card in cards" class="card card-animation">
+        <img ng-src="{{card.image_url}}" alt="{{card.name}}">
       </div>
     </div>
     <div class="page-num">

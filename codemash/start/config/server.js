@@ -12,8 +12,14 @@
  *
  */
 
+var cards = require('../data/cards.js');
+
 module.exports = {
   drawRoutes: function(app) {
+
+    app.get('/api/cards', function(req, res) {
+      res.json(cards);
+    });
 
   }
 };
