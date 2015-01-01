@@ -27,13 +27,13 @@ var csrfValue = function(req) {
 module.exports = {
   drawRoutes: function(app) {
 
-    // app.use(express.cookieParser(secret));
-    // app.use(express.cookieSession());
-    // app.use(express.csrf({value: csrfValue}));
-    // app.use(function(req, res, next) {
-    //   res.cookie('XSRF-TOKEN', req.csrfToken());
-    //   next();
-    // });
+    app.use(express.cookieParser(secret));
+    app.use(express.cookieSession());
+    app.use(express.csrf({value: csrfValue}));
+    app.use(function(req, res, next) {
+      res.cookie('XSRF-TOKEN', req.csrfToken());
+      next();
+    });
 
     app.post('/auth/login', function(req, res) {
       if(req.body.username !== 'ralph') {
