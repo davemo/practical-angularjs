@@ -16,12 +16,9 @@
               <li class="name">
                 <h1><a href="#">Hearthstone Deck Builder</a></h1>
               </li>
-               <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
               <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
             </ul>
-
             <section class="top-bar-section">
-              <!-- Right Nav Section -->
               <ul class="right">
                 <li>
                   <a href="#">Log Out</a>
@@ -30,24 +27,9 @@
             </section>
           </nav>
         </div>
-
-<!--         <div class="row">
-          <div class="large-6 large-offset-3 column">
-            <div id="flash" class="alert-box alert">
-              {{ flash }}
-            </div>
-            <div id="error" class="alert-box alert">
-              {{ error.message}}
-            </div>
-          </div>
-        </div> -->
         <div id="view"></div>
       </div>
-
-      <div class="detail-view detail-view-animation"></div>
-
     </div>
-
 
   </body>
 </html>
