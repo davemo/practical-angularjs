@@ -16,12 +16,9 @@
               <li class="name">
                 <h1><a href="#">Hearthstone Deck Builder</a></h1>
               </li>
-               <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
               <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
             </ul>
-
             <section class="top-bar-section">
-              <!-- Right Nav Section -->
               <ul class="right">
                 <li ng-hide="isLoggedOut()">
                   <a href="#" ng-click="expireMySession()">Log Out</a>
@@ -30,29 +27,10 @@
             </section>
           </nav>
         </div>
-
-        <div class="row">
-          <div class="large-6 large-offset-3 column">
-            <div id="flash" class="alert-box alert" ng-show="flash">
-              {{ flash }}
-            </div>
-            <div id="error" class="alert-box alert" ng-show="error">
-              {{ error.message}}
-            </div>
-          </div>
-        </div>
+        <ng-include src="'flash.html'"></ng-include>
         <div id="view" ui-view></div>
       </div>
-
-      <div class="detail-view detail-view-animation"
-           ng-show="$state.is('cards.detail')"
-           ng-click="$state.go('cards')">
-              <img ng-src="{{detailCard.image_url}}" />
-              <div class="card-back"></div>
-      </div>
-
     </div>
-
 
   </body>
 </html>

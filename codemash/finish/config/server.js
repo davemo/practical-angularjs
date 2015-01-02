@@ -36,7 +36,7 @@ module.exports = {
     });
 
     app.post('/auth/login', function(req, res) {
-      if(req.body.username !== 'ralph') {
+      if(req.body.username !== 'codemash') {
         res.json({ error: { message: 'Invalid Username or Password' }}, 401);
       } else {
         res.send(200);
@@ -50,10 +50,5 @@ module.exports = {
     app.get('/api/cards', function (req, res) {
       res.json(cards);
     });
-
-    app.get('/api/other-cards', function (req, res) {
-      res.json(cards);
-    });
-
   }
 };
