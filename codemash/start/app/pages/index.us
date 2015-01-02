@@ -23,24 +23,15 @@
             <section class="top-bar-section">
               <!-- Right Nav Section -->
               <ul class="right">
-                <li>
-                  <a href="#">Log Out</a>
+                <li ng-hide="isLoggedOut()">
+                  <a href="#" ng-click="expireMySession()">Log Out</a>
                 </li>
               </ul>
             </section>
           </nav>
         </div>
 
-<!--         <div class="row">
-          <div class="large-6 large-offset-3 column">
-            <div id="flash" class="alert-box alert">
-              {{ flash }}
-            </div>
-            <div id="error" class="alert-box alert">
-              {{ error.message}}
-            </div>
-          </div>
-        </div> -->
+        <ng-include src="'flash.html'"></ng-include>
         <div id="view" ui-view></div>
       </div>
     </div>

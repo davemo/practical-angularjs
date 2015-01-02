@@ -1,5 +1,5 @@
 // setter
-var app = angular.module("app", ["ui.router", "ngAnimate"]); // dependencies go in the array as strings, which are names of modules.
+var app = angular.module("app", ["app.auth", "ui.router", "ngAnimate", "ngSanitize"]); // dependencies go in the array as strings, which are names of modules.
 
 app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 
@@ -25,11 +25,30 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     }
   });
 
-  // default route
+  $stateProvider.state('login', {
+    url: '/login',
+    templateUrl: 'login.html',
+    controller: 'LoginController'
+  });
 
-  $urlRouterProvider.otherwise('/cards');
+  // swap default route to login
+  $urlRouterProvider.otherwise('/login');
 
-  // admin, decks
+});
+
+app.controller('LoginController', function($scope, $location, AuthenticationService) {
+
+  if(AuthenticationService.isLoggedIn()) {
+    $location.path('/cards');
+  }
+
+  $scope.credentials = {username: "", password: ""};
+
+  $scope.login = function() {
+    AuthenticationService.login($scope.credentials).success(function() {
+      $location.path('/cards');
+    });
+  };
 
 });
 
@@ -38,8 +57,6 @@ app.run(function($rootScope, $state) {
   $rootScope.searchQueryChanged = function(query) {
     $rootScope.searchQuery = query;
   };
-
-  $rootScope.$state = $state;
 
 });
 
@@ -76,7 +93,6 @@ app.controller("CardsController", function($scope, $rootScope, $state, cardsResp
   $scope.totalPages  = 0;
 
   function renderFilteredCards() {
-    console.log('renderFilteredCards', $scope.currentManaFilter, $scope.currentHeroFilter);
     var pages = CardFilter.filterCards(cards, $scope.currentManaFilter, $scope.currentHeroFilter);
     $scope.totalPages = pages.length;
     $scope.cards = pages[$scope.currentPage];
