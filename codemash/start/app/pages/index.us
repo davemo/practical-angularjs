@@ -23,33 +23,28 @@
             <section class="top-bar-section">
               <!-- Right Nav Section -->
               <ul class="right">
-                <li ng-hide="isLoggedOut()">
-                  <a href="#" ng-click="expireMySession()">Log Out</a>
+                <li>
+                  <a href="#">Log Out</a>
                 </li>
               </ul>
             </section>
           </nav>
         </div>
 
-        <div class="row">
+<!--         <div class="row">
           <div class="large-6 large-offset-3 column">
-            <div id="flash" class="alert-box alert" ng-show="flash">
+            <div id="flash" class="alert-box alert">
               {{ flash }}
             </div>
-            <div id="error" class="alert-box alert" ng-show="error">
+            <div id="error" class="alert-box alert">
               {{ error.message}}
             </div>
           </div>
-        </div>
-        <div id="view" ui-view></div>
+        </div> -->
+        <div id="view"></div>
       </div>
 
-      <div class="detail-view detail-view-animation"
-           ng-show="$state.is('cards.detail')"
-           ng-click="$state.go('cards')">
-              <img ng-src="{{detailCard.image_url}}" />
-              <div class="card-back"></div>
-      </div>
+      <div class="detail-view detail-view-animation"></div>
 
     </div>
 
