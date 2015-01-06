@@ -4,6 +4,7 @@ This workshop, prepared for a CodeMash 2015 precompiler, is designed to educate 
 
 ## Setup / Pre-Requisites
 
+- A code editor of your choice, I like [Sublime Text](http://www.sublimetext.com/)
 - Install [Node.JS](http://nodejs.org/) for your platform of choice
 - Install [LinemanJS](http://www.linemanjs.com) globally `npm i -g lineman`
 - Clone `git clone https://github.com/davemo/practical-angularjs.git` or [Download](https://github.com/davemo/practical-angularjs/archive/master.zip) this repo
@@ -64,6 +65,8 @@ Angular Concepts: `ng-view`, `ui-view`, `ng-href`, `ui-sref`, `ng-include`, `ng-
 * Then, replace the ngRoute dependency with ui.router and refactor using $stateProvider
 * Use `ng-class`, `ng-include` and `ui-sref-active="active"` to make navigation DRY and highlight the current navigation item
 
+**Challenge**: add routes for admin and decks, load the templates, setup decks.html and admin.html to include the navbar
+
 ### Exercise 2: Deck Browser - Basic Listing
 
 Goal: understand how to load and render JSON data from a remote api
@@ -97,6 +100,10 @@ Angular Concepts: `$scope.$watch`, `$scope.$broadcast`, `$filter`, `ng-click`, `
 * Pair off and inject the `CardFilter` service into your controller for the `cards` page. Use the `.filterCards` method to filter cards by Hero and by Mana Cost
 * Set up a `$scope.$watch` on the `currentPage` property and bind `$scope.cards` to `CardFilter.splitIntoPageGroups` at the value of the newPage
 
+**Challenge**: Implement Filter by Mana by leveraging properties in `card_filter.js` and `cards.html`
+
+**Challenge**: add a custom filter, `capitalize` using angular.filter, and use it to render a capitalized `currentHero` within the `<div class="current-hero">` element inside of `cards.html`
+
 ### Exercise 4: Deck Browser - Detail View & Animation
 
 Goal: understand techniques for animating with css3 support, binding application state to urls, and how state transitions work; create a detail view that is shown when a user clicks on a card
@@ -113,6 +120,16 @@ Angular Concepts: `ng-click`, `$state`, `$stateParams`, `$state.onExit`, `$state
 * Create an `ng-click="detailViewFor(card)"` binding on each `<div class="card">` element in cards.html
 * Implement a transition to a new state `cards.detail` which is a nested state of `cards`, add `onEnter` and `onExit` functions to understand how `$stateParams` and state transitions work.
 
+**Challenge**: there’s a `blurred` class in the css that will use a css3 filter to add a blur effect to a containing element, use `ng-class` to toggle a class value of `blurred` in conjunction with a custom function `isDetailState` that returns true if the current state is `cards.detail` and add this to the following elements within `cards.html`:
+  - the ng-include for the navbar
+  - each instance of the element `<div class=“large-12 column”>`
+
+**Challenge**: modify the animation using CSS3 transforms so that it rotates the card 360 degrees along its y-axis creating a spinning card effect.
+
+**Advanced Challenge**: refactor the use of ng-class into an attribute directive `blurs-when-detail-view-active`
+
+**Advanced Challenge**: use your knowledge of ng-animate and the states of an element to add an animation hook for the card detail view in detail.html which animates the cards scale to make it appear zooming.
+
 ### Exercise 5: Authentication
 
 Goal: understand approaches to single page app authentication, how angular manages CSRF and configuring your server-side for the type of CSRF support angular expects; how to manage user sessions using HTML5 SessionStorage where possible while letting the server-side maintain the final say in whether a user is logged in or out
@@ -128,6 +145,10 @@ Angular Concepts: `$httpProvider.interceptors`, `angular.factory`, `promises`, `
 * Create `$scope.credentials = {username:"", password:""}`; bind each property of credentials using `ng-model` on the respective `input` element within the `login.html` template
 * Create a `$scope.login` method on this controller that passes `$scope.credentials` to `AuthenticationService.login` and attaches a `.success` callback which redirects the user to `$location.path('/cards')`
 
+**Challenge**: create a response interceptor that checks for HTTP status 202 and shows a message to the user stating they have been accepted using pieces within `auth.js`; then, create an api endpoint that returns HTTP status 202 along with a message in the response payload (see config/server.js)
+
+**Advanced Challenge**: see if you can bypass the client-side authentication scheme that locks you out of routes you can’t visit unless you are logged in by editing javascript source files in chrome dev tools
+
 ### Bonus Exercise: Refactoring the Detail View
 
 Goal: look at the way angular apps start as experimenting with logic in templates, how this quickly falls apart and a cleaner way to refactor to separate concerns while retaining behaviour and placing less logic in templates.
@@ -142,6 +163,23 @@ Videos:
 * Take the existing `<div class="detail-view">` element and extract it to its own template file `detail.html` within `app/templates`
 * Create a ui-router nested route, `cards.detail` and define a nested `ui-view` element where ui-router will inject the template
 * Eliminate calls to `$state` from within the `detail.html` template you just created and refactor those to functions on the `DetailViewController`
+
+**Challenge**: we’ve duplicated cardsResponse, leveraging the parent states resolve property, extract and refactor to an angular factory that fetches cards once and caches them when the /cards parent route is hit
+
+### Double Bonus Topics: If we crush the exercises...
+
+* Refactor `<li class="card">` to a `<card>` element directive
+* Implement search properly so that it scans across all pages in the current set instead of the currently rendered one
+* Create an end-to-end test with Protractor to verify our search works as advertised
+* Create a `<card-editor>` *element* directive that builds a form which has all fields bound to an instance of our card schema
+* Create a custom *element* directive `<card-browser>` which transcludes `<card>` and renders the card listing as per normal
+* Add an *attribute* directive `as-table` that only works on `<card-browser>` and renders the card listing in a `<table>` element.
+
+### Useful Links
+
+* [ui.router api](http://angular-ui.github.io/ui-router/site/#/api/ui.router)
+* [angular docs](https://docs.angularjs.org/api)
+* [css3 transforms](http://css-tricks.com/almanac/properties/t/transform/)
 
 #### LICENSE
 
